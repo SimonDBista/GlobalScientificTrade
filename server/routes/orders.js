@@ -296,4 +296,29 @@ router.put('/:id/notes', authenticateAdmin, (req, res) => {
     }
 });
 
+// DELETE /api/orders/:id (Admin Only)
+router.delete('/:id', authenticateAdmin, (req, res) => {
+    try {
+        const orderId = req.params.id;
+        const order = db.prepare('SELECT id, order_number FROM orders WHERE id = ?').get(orderId);
+        if (!order) {
+            return res.status(404).json({ error: 'Order not found.' });
+        }
+
+        db.transaction(() => {
+            db.prepare('DELETE FROM order_status_history WHERE order_id = ?').run(orderId);
+            db.prepare('DELETE FROM order_items WHERE order_id = ?').run(orderId);
+            db.prepare('DELETE FROM orders WHERE id = ?').run(orderId);
+        })();
+
+        res.json({
+            message: `Order #${order.order_number} has been deleted successfully.`,
+            deletedId: orderId
+        });
+    } catch (err) {
+        console.error('Delete order error:', err);
+        res.status(500).json({ error: 'Failed to delete order.' });
+    }
+});
+
 module.exports = router;

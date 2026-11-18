@@ -158,4 +158,25 @@ router.put('/:id', authenticateAdmin, (req, res) => {
     }
 });
 
+// DELETE /api/inquiries/:id (Admin Only)
+router.delete('/:id', authenticateAdmin, (req, res) => {
+    try {
+        const inqId = req.params.id;
+        const inquiry = db.prepare('SELECT id, inquiry_number FROM inquiries WHERE id = ?').get(inqId);
+        if (!inquiry) {
+            return res.status(404).json({ error: 'Inquiry not found.' });
+        }
+
+        db.prepare('DELETE FROM inquiries WHERE id = ?').run(inqId);
+
+        res.json({
+            message: `Inquiry #${inquiry.inquiry_number} has been deleted successfully.`,
+            deletedId: inqId
+        });
+    } catch (err) {
+        console.error('Delete inquiry error:', err);
+        res.status(500).json({ error: 'Failed to delete inquiry.' });
+    }
+});
+
 module.exports = router;

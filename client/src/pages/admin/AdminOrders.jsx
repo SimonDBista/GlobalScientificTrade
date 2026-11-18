@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import {
     ShoppingCart, Search, Filter, Eye, ArrowRight, CheckCircle2,
-    Clock, AlertCircle, Phone, Mail, MapPin, Printer
+    Clock, AlertCircle, Phone, Mail, MapPin, Printer, Trash2
 } from 'lucide-react';
 import { api } from '../../api/client';
 
@@ -28,6 +28,18 @@ export default function AdminOrders() {
         })
         .catch(err => console.error('Failed to load orders', err))
         .finally(() => setLoading(false));
+    };
+
+    const handleDeleteOrder = async (order) => {
+        if (!window.confirm(`Are you sure you want to permanently delete order #${order.order_number} (${order.customer_name})? This action cannot be undone.`)) {
+            return;
+        }
+        try {
+            await api.deleteOrder(order.id);
+            loadOrders();
+        } catch (err) {
+            alert(err.message || 'Failed to delete order.');
+        }
     };
 
     useEffect(() => {
@@ -160,13 +172,23 @@ export default function AdminOrders() {
                                         </span>
                                     </td>
                                     <td className="py-3 px-4 text-right">
-                                        <Link
-                                            to={`/admin/orders/${o.id}`}
-                                            className="px-3 py-1 bg-brand-50 hover:bg-brand-100 text-brand-800 font-bold rounded-lg text-xs transition-colors inline-flex items-center space-x-1"
-                                        >
-                                            <Eye className="w-3.5 h-3.5" />
-                                            <span>Manage</span>
-                                        </Link>
+                                        <div className="flex items-center justify-end space-x-1.5">
+                                            <Link
+                                                to={`/admin/orders/${o.id}`}
+                                                className="px-2.5 py-1 bg-brand-50 hover:bg-brand-100 text-brand-800 font-bold rounded-lg text-xs transition-colors inline-flex items-center space-x-1"
+                                                title="View & manage order"
+                                            >
+                                                <Eye className="w-3.5 h-3.5" />
+                                                <span>Manage</span>
+                                            </Link>
+                                            <button
+                                                onClick={() => handleDeleteOrder(o)}
+                                                className="p-1 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                                                title="Delete Order"
+                                            >
+                                                <Trash2 className="w-4 h-4" />
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             ))}

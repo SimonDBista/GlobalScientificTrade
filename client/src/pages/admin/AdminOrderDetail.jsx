@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import {
     ArrowLeft, Printer, CheckCircle2, Clock, AlertCircle, Save,
-    User, Phone, Mail, MapPin, Building2, ShieldCheck, History
+    User, Phone, Mail, MapPin, Building2, ShieldCheck, History, Trash2
 } from 'lucide-react';
 import { api } from '../../api/client';
 
 export default function AdminOrderDetail() {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [orderData, setOrderData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [deleting, setDeleting] = useState(false);
 
     const [newStatus, setNewStatus] = useState('');
     const [statusNotes, setStatusNotes] = useState('');
@@ -60,6 +62,20 @@ export default function AdminOrderDetail() {
             alert(err.message || 'Failed to save notes');
         } finally {
             setSavingNotes(false);
+        }
+    };
+
+    const handleDeleteOrder = async () => {
+        if (!window.confirm(`Are you sure you want to permanently delete order #${orderData.order.order_number}? All associated line items and status records will be deleted. This cannot be undone.`)) {
+            return;
+        }
+        setDeleting(true);
+        try {
+            await api.deleteOrder(orderData.order.id);
+            navigate('/admin/orders');
+        } catch (err) {
+            alert(err.message || 'Failed to delete order.');
+            setDeleting(false);
         }
     };
 
@@ -118,6 +134,15 @@ export default function AdminOrderDetail() {
                     >
                         <Printer className="w-4 h-4" />
                         <span>Print Order Slip</span>
+                    </button>
+                    <button
+                        onClick={handleDeleteOrder}
+                        disabled={deleting}
+                        className="px-3.5 py-2 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 rounded-xl text-xs font-bold transition-all shadow-xs flex items-center space-x-1.5 disabled:opacity-50"
+                        title="Delete this order permanently"
+                    >
+                        <Trash2 className="w-4 h-4" />
+                        <span>{deleting ? 'Deleting...' : 'Delete Order'}</span>
                     </button>
                 </div>
             </div>

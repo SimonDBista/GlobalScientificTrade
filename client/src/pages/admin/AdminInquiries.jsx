@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
     MessageSquare, Search, Filter, Eye, CheckCircle2, AlertCircle,
-    User, Phone, Mail, Building2, Calendar, X, Save
+    User, Phone, Mail, Building2, Calendar, X, Save, Trash2
 } from 'lucide-react';
 import { api } from '../../api/client';
 
@@ -32,6 +32,21 @@ export default function AdminInquiries() {
         })
         .catch(err => console.error('Failed to load inquiries', err))
         .finally(() => setLoading(false));
+    };
+
+    const handleDeleteInquiry = async (inq) => {
+        if (!window.confirm(`Are you sure you want to permanently delete inquiry #${inq.inquiry_number} from ${inq.customer_name}? This action cannot be undone.`)) {
+            return;
+        }
+        try {
+            await api.deleteInquiry(inq.id);
+            if (selectedInquiry && selectedInquiry.id === inq.id) {
+                setSelectedInquiry(null);
+            }
+            loadInquiries();
+        } catch (err) {
+            alert(err.message || 'Failed to delete inquiry.');
+        }
     };
 
     useEffect(() => {
@@ -160,12 +175,22 @@ export default function AdminInquiries() {
                                         </span>
                                     </td>
                                     <td className="py-3 px-4 text-right">
-                                        <button
-                                            onClick={() => handleOpenDetail(inq)}
-                                            className="px-3 py-1 bg-purple-50 hover:bg-purple-100 text-purple-800 font-bold rounded-lg text-xs transition-colors"
-                                        >
-                                            View & Respond
-                                        </button>
+                                        <div className="flex items-center justify-end space-x-1.5">
+                                            <button
+                                                onClick={() => handleOpenDetail(inq)}
+                                                className="px-2.5 py-1 bg-purple-50 hover:bg-purple-100 text-purple-800 font-bold rounded-lg text-xs transition-colors"
+                                                title="View & Respond"
+                                            >
+                                                View
+                                            </button>
+                                            <button
+                                                onClick={() => handleDeleteInquiry(inq)}
+                                                className="p-1 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                                                title="Delete Inquiry"
+                                            >
+                                                <Trash2 className="w-4 h-4" />
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             ))}
@@ -274,21 +299,32 @@ export default function AdminInquiries() {
                                 />
                             </div>
 
-                            <div className="flex items-center justify-end space-x-2 pt-2">
+                            <div className="flex items-center justify-between pt-3 border-t border-slate-100">
                                 <button
                                     type="button"
-                                    onClick={() => setSelectedInquiry(null)}
-                                    className="px-4 py-2 text-xs font-medium text-slate-600 hover:text-slate-900"
+                                    onClick={() => handleDeleteInquiry(selectedInquiry)}
+                                    className="px-3 py-1.5 text-red-600 hover:text-red-700 hover:bg-red-50 rounded-xl text-xs font-bold transition-colors inline-flex items-center space-x-1"
+                                    title="Delete this inquiry"
                                 >
-                                    Close
+                                    <Trash2 className="w-3.5 h-3.5" />
+                                    <span>Delete</span>
                                 </button>
-                                <button
-                                    type="submit"
-                                    disabled={saving}
-                                    className="px-5 py-2 bg-brand-800 hover:bg-brand-900 text-white font-bold text-xs rounded-xl shadow-xs disabled:opacity-50"
-                                >
-                                    {saving ? 'Saving...' : 'Save Updates'}
-                                </button>
+                                <div className="flex items-center space-x-2">
+                                    <button
+                                        type="button"
+                                        onClick={() => setSelectedInquiry(null)}
+                                        className="px-4 py-2 text-xs font-medium text-slate-600 hover:text-slate-900"
+                                    >
+                                        Close
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        disabled={saving}
+                                        className="px-5 py-2 bg-brand-800 hover:bg-brand-900 text-white font-bold text-xs rounded-xl shadow-xs disabled:opacity-50"
+                                    >
+                                        {saving ? 'Saving...' : 'Save Updates'}
+                                    </button>
+                                </div>
                             </div>
                         </form>
                     </div>

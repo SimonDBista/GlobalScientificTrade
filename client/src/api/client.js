@@ -84,6 +84,7 @@ export const api = {
     getOrder: (identifier) => request(`/orders/${identifier}`),
     updateOrderStatus: (id, status, notes) => request(`/orders/${id}/status`, { method: 'PUT', body: JSON.stringify({ status, notes }) }),
     updateOrderNotes: (id, internal_notes) => request(`/orders/${id}/notes`, { method: 'PUT', body: JSON.stringify({ internal_notes }) }),
+    deleteOrder: (id) => request(`/orders/${id}`, { method: 'DELETE' }),
 
     // Inquiries
     submitInquiry: (data) => request('/inquiries', { method: 'POST', body: JSON.stringify(data) }),
@@ -93,6 +94,7 @@ export const api = {
     },
     getInquiry: (id) => request(`/inquiries/${id}`),
     updateInquiry: (id, data) => request(`/inquiries/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+    deleteInquiry: (id) => request(`/inquiries/${id}`, { method: 'DELETE' }),
 
     // Content & Stats
     getContent: () => request('/content'),
