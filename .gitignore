@@ -4,10 +4,6 @@ client/node_modules/
 .pnp
 .pnp.js
 
-# Build artifacts
-client/dist/
-dist/
-
 # Environment and secrets
 .env
 .env.local

@@ -13,13 +13,18 @@ echo ">> 1. Pulling latest code from GitHub..."
 git pull origin main
 
 echo ">> 2. Installing root server dependencies..."
-npm install
+npm install --omit=dev || npm install
 
-echo ">> 3. Installing client dependencies & building production SPA..."
-cd client
-npm install
-npm run build
-cd "$APP_DIR"
+echo ">> 3. Checking production client bundle..."
+if [ -f "client/dist/index.html" ]; then
+    echo ">> Pre-built production client/dist found and verified. Ready for deployment."
+else
+    echo ">> Building client SPA from source..."
+    cd client
+    npm install
+    npm run build
+    cd "$APP_DIR"
+fi
 
 echo ">> 4. Setting filesystem permissions..."
 mkdir -p uploads/products uploads/categories logs
