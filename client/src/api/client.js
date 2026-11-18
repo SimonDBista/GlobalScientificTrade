@@ -6,6 +6,8 @@ export function getAuthToken() {
     return localStorage.getItem('gst_admin_token') || '';
 }
 
+export const getToken = getAuthToken;
+
 export function setAuthToken(token) {
     if (token) {
         localStorage.setItem('gst_admin_token', token);
@@ -68,11 +70,14 @@ export const api = {
     duplicateProduct: (id) => request(`/products/${id}/duplicate`, { method: 'POST' }),
     deleteProduct: (id) => request(`/products/${id}`, { method: 'DELETE' }),
 
-    // Upload
-    uploadImage: (file) => {
+    // Image Upload & Automatic Optimization
+    uploadImage: (file, type = 'product') => {
         const formData = new FormData();
         formData.append('image', file);
-        return request('/upload', { method: 'POST', body: formData });
+        return request(`/upload?type=${encodeURIComponent(type)}`, {
+            method: 'POST',
+            body: formData
+        });
     },
 
     // Orders
@@ -104,23 +109,5 @@ export const api = {
     // Auth
     login: (username, password) => request('/auth/login', { method: 'POST', body: JSON.stringify({ username, password }) }),
     getMe: () => request('/auth/me'),
-    updateProfile: (data) => request('/auth/profile', { method: 'PUT', body: JSON.stringify(data) }),
-
-    // Image Upload & Automatic Optimization
-    uploadImage: (file, type = 'product') => {
-        const formData = new FormData();
-        formData.append('image', file);
-        const token = getToken();
-        return fetch(`${API_BASE}/upload?type=${type}`, {
-            method: 'POST',
-            headers: token ? { Authorization: `Bearer ${token}` } : {},
-            body: formData
-        }).then(async res => {
-            if (!res.ok) {
-                const data = await res.json().catch(() => ({}));
-                throw new Error(data.error || 'Upload failed');
-            }
-            return res.json();
-        });
-    }
+    updateProfile: (data) => request('/auth/profile', { method: 'PUT', body: JSON.stringify(data) })
 };
