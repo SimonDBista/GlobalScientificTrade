@@ -7,6 +7,7 @@ import {
 import { api } from '../api/client';
 import { useSettings } from '../context/SettingsContext';
 import ProductCard from '../components/ui/ProductCard';
+import useSEO from '../hooks/useSEO';
 
 export default function Products() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -15,6 +16,12 @@ export default function Products() {
     const [products, setProducts] = useState([]);
     const [total, setTotal] = useState(0);
     const [loading, setLoading] = useState(true);
+
+    useSEO({
+        title: 'Products — Scientific & Lab Equipment Catalog',
+        description: 'Browse our complete catalog of scientific laboratory instruments, civil engineering apparatus, math lab kits, and educational equipment. Available for schools, colleges, and institutions across Nepal.',
+        url: '/products'
+    });
 
     // Filters
     const searchQuery = searchParams.get('search') || '';

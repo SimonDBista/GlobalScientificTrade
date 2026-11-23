@@ -7,11 +7,60 @@ import {
 import { api } from '../api/client';
 import { useSettings } from '../context/SettingsContext';
 import ProductCard from '../components/ui/ProductCard';
+import useSEO from '../hooks/useSEO';
 
 export default function Home() {
     const { settings, categories } = useSettings();
     const [featuredProducts, setFeaturedProducts] = useState([]);
     const [loadingProducts, setLoadingProducts] = useState(true);
+
+    useSEO({
+        title: 'Scientific & Lab Equipment Supplier Nepal',
+        description: 'Global Scientific Trade Pvt. Ltd. — Nepal\'s trusted supplier of science laboratory instruments, civil engineering apparatus, math lab kits, and ECD materials. Offices in Kathmandu & Dhangadhi.',
+        url: '/',
+        jsonLd: {
+            '@context': 'https://schema.org',
+            '@type': 'LocalBusiness',
+            name: 'Global Scientific Trade Pvt. Ltd.',
+            description: 'Supplier of scientific laboratory instruments, civil engineering apparatus, math lab kits, and early childhood development materials in Nepal.',
+            url: 'https://globalscientifictrade.com.np',
+            logo: 'https://globalscientifictrade.com.np/logo.jpeg',
+            image: 'https://globalscientifictrade.com.np/logo.jpeg',
+            telephone: ['+977-91-591014', '+977-9847879700', '+977-1-5924298'],
+            email: 'info@globalscientifictrade.com.np',
+            address: [
+                {
+                    '@type': 'PostalAddress',
+                    streetAddress: 'Swayambhu',
+                    addressLocality: 'Kathmandu',
+                    addressCountry: 'NP',
+                    description: 'Kathmandu Office'
+                },
+                {
+                    '@type': 'PostalAddress',
+                    addressLocality: 'Dhangadhi',
+                    addressRegion: 'Sudurpashchim Pradesh',
+                    addressCountry: 'NP',
+                    description: 'Dhangadhi Office'
+                }
+            ],
+            areaServed: { '@type': 'Country', name: 'Nepal' },
+            knowsAbout: [
+                'Science Laboratory Equipment',
+                'Civil Engineering Apparatus',
+                'Mathematics Laboratory Kits',
+                'Early Childhood Development Materials',
+                'Educational Equipment'
+            ],
+            openingHoursSpecification: {
+                '@type': 'OpeningHoursSpecification',
+                dayOfWeek: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+                opens: '09:00',
+                closes: '18:00'
+            },
+            sameAs: ['https://github.com/SimonDBista/GlobalScientificTrade']
+        }
+    });
 
     useEffect(() => {
         api.getProducts({ featured: 'true', limit: 8 })

@@ -5,9 +5,23 @@ import {
 } from 'lucide-react';
 import { useSettings } from '../context/SettingsContext';
 import { api } from '../api/client';
+import useSEO from '../hooks/useSEO';
 
 export default function Contact() {
     const { settings } = useSettings();
+
+    useSEO({
+        title: 'Contact Us — Global Scientific Trade Nepal',
+        description: 'Contact Global Scientific Trade Pvt. Ltd. for scientific equipment inquiries. Reach our Kathmandu office at +977-1-5924298 or Dhangadhi at +977-91-591014.',
+        url: '/contact',
+        jsonLd: {
+            '@context': 'https://schema.org',
+            '@type': 'ContactPage',
+            name: 'Contact Global Scientific Trade',
+            url: 'https://globalscientifictrade.com.np/contact',
+            description: 'Contact Global Scientific Trade for scientific laboratory equipment, engineering apparatus, and educational materials inquiries in Nepal.'
+        }
+    });
 
     const [formData, setFormData] = useState({
         customer_name: '',

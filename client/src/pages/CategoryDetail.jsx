@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Search, Filter, Layers, Microscope, HardHat, Compass, Baby } from 'lucide-react';
 import { api } from '../api/client';
 import ProductCard from '../components/ui/ProductCard';
+import useSEO from '../hooks/useSEO';
 
 export default function CategoryDetail() {
     const { slug } = useParams();
@@ -10,6 +11,26 @@ export default function CategoryDetail() {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState('');
+
+    useSEO({
+        title: category ? `${category.name} — Equipment Catalog` : 'Product Category',
+        description: category
+            ? `Browse our ${category.name} collection. ${category.description || 'High-quality equipment for schools, colleges, and institutions in Nepal.'}`
+            : 'Browse our scientific and educational equipment categories.',
+        url: `/category/${slug}`,
+        jsonLd: category ? {
+            '@context': 'https://schema.org',
+            '@type': 'CollectionPage',
+            name: category.name,
+            description: category.description || `${category.name} equipment catalog`,
+            url: `https://globalscientifictrade.com.np/category/${slug}`,
+            publisher: {
+                '@type': 'Organization',
+                name: 'Global Scientific Trade Pvt. Ltd.',
+                url: 'https://globalscientifictrade.com.np'
+            }
+        } : null
+    });
 
     useEffect(() => {
         setLoading(true);

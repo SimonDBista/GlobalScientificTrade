@@ -5,9 +5,29 @@ import {
     Microscope, HardHat, Compass, Baby, ArrowRight, Truck, Wrench
 } from 'lucide-react';
 import { useSettings } from '../context/SettingsContext';
+import useSEO from '../hooks/useSEO';
 
 export default function About() {
     const { settings, categories } = useSettings();
+
+    useSEO({
+        title: 'About Us — Trusted Scientific Equipment Supplier Nepal',
+        description: 'Learn about Global Scientific Trade Pvt. Ltd. — Nepal\'s trusted supplier of laboratory, civil engineering, math lab, and ECD equipment, with offices in Kathmandu and Dhangadhi.',
+        url: '/about',
+        jsonLd: {
+            '@context': 'https://schema.org',
+            '@type': 'AboutPage',
+            name: 'About Global Scientific Trade',
+            url: 'https://globalscientifictrade.com.np/about',
+            description: 'Global Scientific Trade Pvt. Ltd. is a leading supplier of scientific laboratory instruments, civil engineering apparatus, math lab kits, and early childhood development materials across Nepal.',
+            publisher: {
+                '@type': 'Organization',
+                name: 'Global Scientific Trade Pvt. Ltd.',
+                url: 'https://globalscientifictrade.com.np',
+                logo: 'https://globalscientifictrade.com.np/logo.jpeg'
+            }
+        }
+    });
 
     return (
         <div className="space-y-16 pb-16">

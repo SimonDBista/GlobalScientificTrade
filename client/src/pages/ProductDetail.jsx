@@ -10,6 +10,7 @@ import ProductPlaceholder from '../components/ui/ProductPlaceholder';
 import ProductCard from '../components/ui/ProductCard';
 import QuoteModal from '../components/ui/QuoteModal';
 import BuyNowModal from '../components/ui/BuyNowModal';
+import useSEO from '../hooks/useSEO';
 
 export default function ProductDetail() {
     const { identifier } = useParams();
@@ -36,6 +37,36 @@ export default function ProductDetail() {
             .catch(err => console.error('Failed to load product detail', err))
             .finally(() => setLoading(false));
     }, [identifier]);
+
+    // Per-product SEO & structured data
+    useSEO({
+        title: product ? `${product.name}${product.model_number ? ' — ' + product.model_number : ''}` : 'Product Details',
+        description: product
+            ? `${product.short_description || product.description?.substring(0, 155) || product.name + ' — available from Global Scientific Trade Nepal.'}`
+            : 'Scientific equipment product details.',
+        url: `/products/${identifier}`,
+        image: product?.primary_image ? `https://globalscientifictrade.com.np${product.primary_image}` : undefined,
+        type: 'product',
+        jsonLd: product ? {
+            '@context': 'https://schema.org',
+            '@type': 'Product',
+            name: product.name,
+            description: product.short_description || product.description || product.name,
+            sku: product.sku || product.model_number,
+            mpn: product.model_number,
+            brand: product.brand ? { '@type': 'Brand', name: product.brand } : undefined,
+            image: product.primary_image ? `https://globalscientifictrade.com.np${product.primary_image}` : 'https://globalscientifictrade.com.np/logo.jpeg',
+            url: `https://globalscientifictrade.com.np/products/${identifier}`,
+            offers: {
+                '@type': 'Offer',
+                priceCurrency: 'NPR',
+                price: product.price || undefined,
+                priceSpecification: !product.price ? { '@type': 'PriceSpecification', description: 'Request a Quote' } : undefined,
+                availability: product.is_available !== false ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+                seller: { '@type': 'Organization', name: 'Global Scientific Trade Pvt. Ltd.' }
+            }
+        } : null
+    });
 
     if (loading) {
         return (

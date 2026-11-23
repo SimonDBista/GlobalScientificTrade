@@ -11,6 +11,7 @@ const uploadRoutes = require('./routes/upload');
 const orderRoutes = require('./routes/orders');
 const inquiryRoutes = require('./routes/inquiries');
 const contentRoutes = require('./routes/content');
+const seoRoutes = require('./routes/seo');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -42,6 +43,9 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/inquiries', inquiryRoutes);
 app.use('/api/content', contentRoutes);
 
+// SEO routes (sitemap.xml, robots.txt) — must be before static/catch-all
+app.use('/', seoRoutes);
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
     res.json({
@@ -59,6 +63,10 @@ if (fs.existsSync(clientDist)) {
         // Don't intercept API routes
         if (req.path.startsWith('/api')) {
             return res.status(404).json({ error: 'Endpoint not found' });
+        }
+        // Don't intercept SEO routes
+        if (req.path === '/sitemap.xml' || req.path === '/robots.txt') {
+            return res.status(404).end();
         }
         res.sendFile(path.join(clientDist, 'index.html'));
     });
