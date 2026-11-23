@@ -7,8 +7,8 @@ export default function AdminLogin() {
     const { login } = useAuth();
     const navigate = useNavigate();
 
-    const [username, setUsername] = useState('admin');
-    const [password, setPassword] = useState('AdminPassword2026!');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const [submitting, setSubmitting] = useState(false);
     const [error, setError] = useState(null);
 
@@ -63,6 +63,8 @@ export default function AdminLogin() {
                                 required
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
+                                placeholder="Enter username"
+                                autoComplete="username"
                                 className="w-full text-xs pl-9 pr-3 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:outline-hidden"
                             />
                         </div>
@@ -79,6 +81,8 @@ export default function AdminLogin() {
                                 required
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
+                                placeholder="Enter password"
+                                autoComplete="current-password"
                                 className="w-full text-xs pl-9 pr-3 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:outline-hidden"
                             />
                         </div>

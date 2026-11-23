@@ -22,12 +22,12 @@ export default function AdminOrders() {
             search: searchQuery,
             limit: 100
         })
-        .then(res => {
-            setOrders(res.orders || []);
-            setTotal(res.total || 0);
-        })
-        .catch(err => console.error('Failed to load orders', err))
-        .finally(() => setLoading(false));
+            .then(res => {
+                setOrders(res.orders || []);
+                setTotal(res.total || 0);
+            })
+            .catch(err => console.error('Failed to load orders', err))
+            .finally(() => setLoading(false));
     };
 
     const handleDeleteOrder = async (order) => {
