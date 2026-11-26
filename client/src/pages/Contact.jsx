@@ -315,6 +315,33 @@ export default function Contact() {
                     </div>
                 </div>
             </div>
+
+            {/* Google Maps Location */}
+            <div className="max-w-7xl mx-auto px-4">
+                <div className="bg-white rounded-3xl p-4 sm:p-6 border border-slate-200 shadow-xs space-y-4">
+                    <div className="flex items-center space-x-2.5">
+                        <div className="w-8 h-8 rounded-xl bg-brand-800 text-white flex items-center justify-center shrink-0 shadow-xs">
+                            <MapPin className="w-4 h-4" />
+                        </div>
+                        <div>
+                            <h3 className="font-extrabold text-slate-900 text-sm sm:text-base">Location Map — Kathmandu Office</h3>
+                            <p className="text-[11px] text-slate-500">Swayambhu, Kathmandu, Nepal</p>
+                        </div>
+                    </div>
+                    <div className="w-full h-[450px] rounded-2xl overflow-hidden border border-slate-200 shadow-inner">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d497.92021859115704!2d85.28814953735504!3d27.722917663436217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb18941eba615b%3A0xd22bccf8d00e6203!2sBabita%20Beauty%20Parlour!5e0!3m2!1sen!2snp!4v1795673081283!5m2!1sen!2snp"
+                            width="100%"
+                            height="100%"
+                            style={{ border: 0 }}
+                            allowFullScreen=""
+                            loading="lazy"
+                            referrerPolicy="strict-origin-when-cross-origin"
+                            title="Global Scientific Trade Location Map"
+                        />
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
