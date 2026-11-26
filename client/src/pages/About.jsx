@@ -11,15 +11,16 @@ export default function About() {
     const { settings, categories } = useSettings();
 
     useSEO({
-        title: 'About Us — Trusted Scientific Equipment Supplier Nepal',
-        description: 'Learn about Global Scientific Trade Pvt. Ltd. — Nepal\'s trusted supplier of laboratory, civil engineering, math lab, and ECD equipment, with offices in Kathmandu and Dhangadhi.',
+        title: 'About Us — Science Lab, Engineering, Math & Montessori Supplier Nepal',
+        description: 'About Global Scientific Trade Pvt. Ltd. — Nepal\'s premier supplier of science lab products, civil engineering equipment, math lab and learning tools, and Montessori kids materials with offices in Kathmandu & Dhangadhi.',
+        keywords: 'science lab product, civil engineering equipment, math lab and learning tools, montessori kids material, lab equipment supplier Kathmandu, scientific instruments Dhangadhi, educational equipment Nepal',
         url: '/about',
         jsonLd: {
             '@context': 'https://schema.org',
             '@type': 'AboutPage',
             name: 'About Global Scientific Trade',
             url: 'https://globalscientifictrade.com.np/about',
-            description: 'Global Scientific Trade Pvt. Ltd. is a leading supplier of scientific laboratory instruments, civil engineering apparatus, math lab kits, and early childhood development materials across Nepal.',
+            description: 'Global Scientific Trade Pvt. Ltd. is a premier supplier of science lab products, civil engineering equipment, math lab and learning tools, and Montessori kids materials in Kathmandu and Dhangadhi, Nepal.',
             publisher: {
                 '@type': 'Organization',
                 name: 'Global Scientific Trade Pvt. Ltd.',

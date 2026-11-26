@@ -15,50 +15,131 @@ export default function Home() {
     const [loadingProducts, setLoadingProducts] = useState(true);
 
     useSEO({
-        title: 'Scientific & Lab Equipment Supplier Nepal',
-        description: 'Global Scientific Trade Pvt. Ltd. — Nepal\'s trusted supplier of science laboratory instruments, civil engineering apparatus, math lab kits, and ECD materials. Offices in Kathmandu & Dhangadhi.',
+        title: 'Science Lab, Civil Engineering, Math Lab & Montessori Materials Nepal',
+        description: 'Global Scientific Trade Pvt. Ltd. — Supplier of science lab products, civil engineering equipment, math lab and learning tools, and Montessori kids materials in Kathmandu & Dhangadhi, Nepal.',
+        keywords: 'science lab product, civil engineering equipment, math lab and learning tools, montessori kids material, dhangadhi, kathmandu, nepal, laboratory apparatus, science equipment nepal',
         url: '/',
         jsonLd: {
             '@context': 'https://schema.org',
-            '@type': 'LocalBusiness',
-            name: 'Global Scientific Trade Pvt. Ltd.',
-            description: 'Supplier of scientific laboratory instruments, civil engineering apparatus, math lab kits, and early childhood development materials in Nepal.',
-            url: 'https://globalscientifictrade.com.np',
-            logo: 'https://globalscientifictrade.com.np/logo.jpeg',
-            image: 'https://globalscientifictrade.com.np/logo.jpeg',
-            telephone: ['+977-91-591014', '+977-9847879700', '+977-1-5924298'],
-            email: 'info@globalscientifictrade.com.np',
-            address: [
+            '@graph': [
                 {
-                    '@type': 'PostalAddress',
-                    streetAddress: 'Swayambhu',
-                    addressLocality: 'Kathmandu',
-                    addressCountry: 'NP',
-                    description: 'Kathmandu Office'
+                    '@type': 'LocalBusiness',
+                    '@id': 'https://globalscientifictrade.com.np/#organization',
+                    name: 'Global Scientific Trade Pvt. Ltd.',
+                    alternateName: ['Global Scientific Trade', 'GST Nepal'],
+                    description: 'Supplier of science lab products, civil engineering equipment, math lab and learning tools, and Montessori kids materials in Kathmandu and Dhangadhi, Nepal.',
+                    url: 'https://globalscientifictrade.com.np',
+                    logo: 'https://globalscientifictrade.com.np/logo.jpeg',
+                    image: 'https://globalscientifictrade.com.np/logo.jpeg',
+                    telephone: ['+977-1-5924298', '+977-91-591014', '+977-9847879700'],
+                    email: 'gsciencehouse2077@gmail.com',
+                    priceRange: '$$',
+                    address: [
+                        {
+                            '@type': 'PostalAddress',
+                            streetAddress: 'Swayambhu',
+                            addressLocality: 'Kathmandu',
+                            addressRegion: 'Bagmati Province',
+                            postalCode: '44600',
+                            addressCountry: 'NP',
+                            description: 'Kathmandu Head Office & Showroom'
+                        },
+                        {
+                            '@type': 'PostalAddress',
+                            addressLocality: 'Dhangadhi',
+                            addressRegion: 'Sudurpashchim Province',
+                            postalCode: '10900',
+                            addressCountry: 'NP',
+                            description: 'Dhangadhi Regional Office & Showroom'
+                        }
+                    ],
+                    geo: [
+                        {
+                            '@type': 'GeoCoordinates',
+                            latitude: 27.7228,
+                            longitude: 85.2878,
+                            name: 'Kathmandu Office'
+                        }
+                    ],
+                    areaServed: [
+                        { '@type': 'City', name: 'Kathmandu' },
+                        { '@type': 'City', name: 'Dhangadhi' },
+                        { '@type': 'Country', name: 'Nepal' }
+                    ],
+                    hasOfferCatalog: {
+                        '@type': 'OfferCatalog',
+                        name: 'Product Catalog',
+                        itemListElement: [
+                            {
+                                '@type': 'OfferCatalog',
+                                name: 'Science Lab Products',
+                                description: 'Physics, chemistry, biology lab instruments, glassware, microscopes, and complete laboratory setups.'
+                            },
+                            {
+                                '@type': 'OfferCatalog',
+                                name: 'Civil Engineering Equipment',
+                                description: 'Soil testing, concrete testing, aggregate, surveying, and material testing apparatus.'
+                            },
+                            {
+                                '@type': 'OfferCatalog',
+                                name: 'Math Lab and Learning Tools',
+                                description: 'Mathematical models, geometry kits, abacus, and interactive numeracy tools.'
+                            },
+                            {
+                                '@type': 'OfferCatalog',
+                                name: 'Montessori Kids Materials',
+                                description: 'Early childhood development (ECD) materials, sensory toys, and Montessori educational kits.'
+                            }
+                        ]
+                    },
+                    openingHoursSpecification: [
+                        {
+                            '@type': 'OpeningHoursSpecification',
+                            dayOfWeek: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+                            opens: '09:00',
+                            closes: '18:00'
+                        }
+                    ]
                 },
                 {
-                    '@type': 'PostalAddress',
-                    addressLocality: 'Dhangadhi',
-                    addressRegion: 'Sudurpashchim Pradesh',
-                    addressCountry: 'NP',
-                    description: 'Dhangadhi Office'
+                    '@type': 'FAQPage',
+                    '@id': 'https://globalscientifictrade.com.np/#faq',
+                    mainEntity: [
+                        {
+                            '@type': 'Question',
+                            name: 'What products does Global Scientific Trade sell in Nepal?',
+                            acceptedAnswer: {
+                                '@type': 'Answer',
+                                text: 'Global Scientific Trade sells four primary categories across Nepal: 1) Science Lab Products (physics, chemistry, biology glassware and instruments), 2) Civil Engineering Equipment (soil, concrete, and survey apparatus), 3) Math Lab and Learning Tools, and 4) Montessori Kids Materials and ECD educational toys.'
+                            }
+                        },
+                        {
+                            '@type': 'Question',
+                            name: 'Where can I buy science lab products and civil engineering equipment in Kathmandu?',
+                            acceptedAnswer: {
+                                '@type': 'Answer',
+                                text: 'You can buy science lab products and civil engineering equipment directly from Global Scientific Trade located in Swayambhu, Kathmandu. Call our landline at +977 1-5924298 for orders and quotations.'
+                            }
+                        },
+                        {
+                            '@type': 'Question',
+                            name: 'Does Global Scientific Trade sell math lab tools and Montessori kids materials in Dhangadhi?',
+                            acceptedAnswer: {
+                                '@type': 'Answer',
+                                text: 'Yes, Global Scientific Trade has a dedicated regional showroom in Dhangadhi, Sudurpashchim, supplying math lab kits, learning tools, and Montessori kids materials. Contact our Dhangadhi office at +977 91-591014 or +977 9847879700.'
+                            }
+                        },
+                        {
+                            '@type': 'Question',
+                            name: 'Do you provide delivery for laboratory equipment across Nepal?',
+                            acceptedAnswer: {
+                                '@type': 'Answer',
+                                text: 'Yes, Global Scientific Trade delivers science lab products, civil engineering equipment, math lab tools, and Montessori kids materials to schools, colleges, engineering firms, and institutions nationwide across all 7 provinces of Nepal.'
+                            }
+                        }
+                    ]
                 }
-            ],
-            areaServed: { '@type': 'Country', name: 'Nepal' },
-            knowsAbout: [
-                'Science Laboratory Equipment',
-                'Civil Engineering Apparatus',
-                'Mathematics Laboratory Kits',
-                'Early Childhood Development Materials',
-                'Educational Equipment'
-            ],
-            openingHoursSpecification: {
-                '@type': 'OpeningHoursSpecification',
-                dayOfWeek: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-                opens: '09:00',
-                closes: '18:00'
-            },
-            sameAs: ['https://github.com/SimonDBista/GlobalScientificTrade']
+            ]
         }
     });
 

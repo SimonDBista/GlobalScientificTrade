@@ -18,8 +18,9 @@ export default function Products() {
     const [loading, setLoading] = useState(true);
 
     useSEO({
-        title: 'Products — Scientific & Lab Equipment Catalog',
-        description: 'Browse our complete catalog of scientific laboratory instruments, civil engineering apparatus, math lab kits, and educational equipment. Available for schools, colleges, and institutions across Nepal.',
+        title: 'Products — Science Lab, Civil Engineering, Math & Montessori Catalog',
+        description: 'Explore our full catalog: science lab products, civil engineering equipment, math lab and learning tools, and Montessori kids materials. In-stock with supply and dispatch in Kathmandu and Dhangadhi, Nepal.',
+        keywords: 'science lab product, civil engineering equipment, math lab and learning tools, montessori kids material, lab equipment catalog Nepal, science apparatus Kathmandu, civil testing Dhangadhi',
         url: '/products'
     });
 

@@ -11,15 +11,16 @@ export default function Contact() {
     const { settings } = useSettings();
 
     useSEO({
-        title: 'Contact Us — Global Scientific Trade Nepal',
-        description: 'Contact Global Scientific Trade Pvt. Ltd. for scientific equipment inquiries. Reach our Kathmandu office at +977-1-5924298 or Dhangadhi at +977-91-591014.',
+        title: 'Contact Us — Science Lab, Engineering & Montessori Supplier Kathmandu & Dhangadhi',
+        description: 'Contact Global Scientific Trade Pvt. Ltd. for quotes on science lab products, civil engineering equipment, math lab tools, and Montessori kids materials. Kathmandu Office (+977 1-5924298) and Dhangadhi Office (+977 91-591014 / +977 9847879700).',
+        keywords: 'science lab product Kathmandu, civil engineering equipment Dhangadhi, math lab tools Nepal, montessori kids material showroom Kathmandu, lab supplies Dhangadhi, Global Scientific Trade phone',
         url: '/contact',
         jsonLd: {
             '@context': 'https://schema.org',
             '@type': 'ContactPage',
             name: 'Contact Global Scientific Trade',
             url: 'https://globalscientifictrade.com.np/contact',
-            description: 'Contact Global Scientific Trade for scientific laboratory equipment, engineering apparatus, and educational materials inquiries in Nepal.'
+            description: 'Get quotes and consultations for science lab products, civil engineering equipment, math lab and learning tools, and Montessori kids materials in Kathmandu and Dhangadhi, Nepal.'
         }
     });
 

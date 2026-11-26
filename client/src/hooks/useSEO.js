@@ -16,7 +16,7 @@ const DEFAULT_IMAGE = `${BASE_URL}/logo.jpeg`;
  * @param {string} [opts.type]       - OG type: 'website' | 'product' | 'article' (default 'website')
  * @param {Object} [opts.jsonLd]     - Optional JSON-LD structured data object
  */
-export default function useSEO({ title, description, url = '', image, type = 'website', jsonLd }) {
+export default function useSEO({ title, description, keywords, url = '', image, type = 'website', jsonLd }) {
     useEffect(() => {
         const fullTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} | Scientific & Lab Equipment Nepal`;
         const canonicalUrl = `${BASE_URL}${url}`;
@@ -27,6 +27,7 @@ export default function useSEO({ title, description, url = '', image, type = 'we
 
         // Helper to set/create a meta tag
         const setMeta = (selector, attr, value) => {
+            if (!value) return;
             let el = document.querySelector(selector);
             if (!el) {
                 el = document.createElement('meta');
@@ -39,6 +40,9 @@ export default function useSEO({ title, description, url = '', image, type = 'we
 
         // Standard meta
         setMeta('meta[name="description"]', 'name="description"', description);
+        if (keywords) {
+            setMeta('meta[name="keywords"]', 'name="keywords"', keywords);
+        }
 
         // Open Graph
         setMeta('meta[property="og:title"]', 'property="og:title"', fullTitle);
@@ -76,5 +80,5 @@ export default function useSEO({ title, description, url = '', image, type = 'we
         return () => {
             // No cleanup needed; next page will overwrite
         };
-    }, [title, description, url, image, type, jsonLd]);
+    }, [title, description, keywords, url, image, type, jsonLd]);
 }
