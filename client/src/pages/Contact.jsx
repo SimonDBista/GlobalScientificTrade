@@ -317,29 +317,57 @@ export default function Contact() {
                 </div>
             </div>
 
-            {/* Google Maps Location */}
+            {/* Google Maps Locations: Kathmandu & Dhangadhi */}
             <div className="max-w-7xl mx-auto px-4">
-                <div className="bg-white rounded-3xl p-4 sm:p-6 border border-slate-200 shadow-xs space-y-4">
-                    <div className="flex items-center space-x-2.5">
-                        <div className="w-8 h-8 rounded-xl bg-brand-800 text-white flex items-center justify-center shrink-0 shadow-xs">
-                            <MapPin className="w-4 h-4" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Kathmandu Office Map */}
+                    <div className="bg-white rounded-3xl p-4 sm:p-5 border border-slate-200 shadow-xs space-y-3">
+                        <div className="flex items-center space-x-2.5">
+                            <div className="w-8 h-8 rounded-xl bg-brand-800 text-white flex items-center justify-center shrink-0 shadow-xs">
+                                <MapPin className="w-4 h-4" />
+                            </div>
+                            <div>
+                                <h3 className="font-extrabold text-slate-900 text-sm">Kathmandu Office Location</h3>
+                                <p className="text-[11px] text-slate-500">Swayambhu, Kathmandu | Tel: +977 1-5924298</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 className="font-extrabold text-slate-900 text-sm sm:text-base">Location Map — Kathmandu Office</h3>
-                            <p className="text-[11px] text-slate-500">Swayambhu, Kathmandu, Nepal</p>
+                        <div className="w-full h-[280px] rounded-2xl overflow-hidden border border-slate-200 shadow-inner">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3531.8220849183267!2d85.28826!3d27.722779!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjfCsDQzJzIyLjAiTiA4NcKwMTcnMTcuNyJF!5e0!3m2!1sen!2snp!4v1795675543863!5m2!1sen!2snp"
+                                width="100%"
+                                height="100%"
+                                style={{ border: 0 }}
+                                allowFullScreen=""
+                                loading="lazy"
+                                referrerPolicy="strict-origin-when-cross-origin"
+                                title="Kathmandu Office Location Map"
+                            />
                         </div>
                     </div>
-                    <div className="w-full h-[450px] rounded-2xl overflow-hidden border border-slate-200 shadow-inner">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d530.6310559317159!2d85.2878075149896!3d27.72277394583203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2snp!4v1795673544836!5m2!1sen!2snp"
-                            width="100%"
-                            height="100%"
-                            style={{ border: 0 }}
-                            allowFullScreen=""
-                            loading="lazy"
-                            referrerPolicy="strict-origin-when-cross-origin"
-                            title="Global Scientific Trade Location Map"
-                        />
+
+                    {/* Dhangadhi Office Map */}
+                    <div className="bg-white rounded-3xl p-4 sm:p-5 border border-slate-200 shadow-xs space-y-3">
+                        <div className="flex items-center space-x-2.5">
+                            <div className="w-8 h-8 rounded-xl bg-gold-600 text-slate-950 flex items-center justify-center shrink-0 shadow-xs">
+                                <MapPin className="w-4 h-4" />
+                            </div>
+                            <div>
+                                <h3 className="font-extrabold text-slate-900 text-sm">Dhangadhi Office Location</h3>
+                                <p className="text-[11px] text-slate-500">Dhangadhi, Kailali | Tel: +977 91-591014 / +977 9847879700</p>
+                            </div>
+                        </div>
+                        <div className="w-full h-[280px] rounded-2xl overflow-hidden border border-slate-200 shadow-inner">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d320.33218230486307!2d80.55988788069793!3d28.699999603612834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2s!5e0!3m2!1sne!2snp!4v1795675476528!5m2!1sne!2snp"
+                                width="100%"
+                                height="100%"
+                                style={{ border: 0 }}
+                                allowFullScreen=""
+                                loading="lazy"
+                                referrerPolicy="strict-origin-when-cross-origin"
+                                title="Dhangadhi Office Location Map"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
