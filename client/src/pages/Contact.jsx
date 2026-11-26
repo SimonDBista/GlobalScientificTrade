@@ -330,7 +330,7 @@ export default function Contact() {
                     </div>
                     <div className="w-full h-[450px] rounded-2xl overflow-hidden border border-slate-200 shadow-inner">
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d497.92021859115704!2d85.28814953735504!3d27.722917663436217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb18941eba615b%3A0xd22bccf8d00e6203!2sBabita%20Beauty%20Parlour!5e0!3m2!1sen!2snp!4v1795673081283!5m2!1sen!2snp"
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d530.6310559317159!2d85.2878075149896!3d27.72277394583203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2snp!4v1795673544836!5m2!1sen!2snp"
                             width="100%"
                             height="100%"
                             style={{ border: 0 }}
